@@ -1,0 +1,6 @@
+module,status,score,key_finding
+Data Quality & AI Readiness,High Risk,67.77,Not production-ready. Major cleaning required before modeling
+Data Drift Detection,Risk Detected,-,2 moderate drift columns and 2 significant drift columns detected
+Leakage & Bias Audit,Risk Detected,-,"2 leakage warnings, 1 high severity, 11 fairness rows checked"
+Baseline Model Evaluation,Weak Baseline,0.321,Best baseline model is Logistic Regression with F1-score 0.321 and ROC-AUC 0.5826
+LLM Response Evaluation,Risk Detected,68.49,Average LLM response quality score is 68.49/100 with 3 failed responses
