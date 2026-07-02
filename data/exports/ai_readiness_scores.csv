@@ -1,0 +1,2 @@
+data_quality_score,missing_safety_score,invalid_value_safety_score,duplicate_safety_score,outlier_safety_score,imbalance_safety_score,identifier_safety_score,ai_readiness_score,risk_level,deployment_decision
+57.94,55.3,70.44,85.2,83.64,75,85,67.77,High Risk,Not production-ready. Major cleaning required before modeling

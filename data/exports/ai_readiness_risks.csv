@@ -1,0 +1,7 @@
+risk_type,severity,details
+Missing Values,Medium,Maximum column missing percentage is 8.08%
+Invalid Values,High,25 invalid negative values detected
+Duplicate Rows,Medium,1.48% duplicate rows detected
+Outliers,Medium,Maximum column outlier percentage is 2.07%
+Class Imbalance,Medium,Target imbalance risk is Medium
+Identifier Columns,Medium,Identifier columns should be excluded from modeling: ['customer_id']
