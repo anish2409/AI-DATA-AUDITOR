@@ -89,6 +89,11 @@ def calculate_reference_overlap(model_answer, reference_answer):
 
     return round(len(overlap) / len(reference_tokens), 4)
 
+def contains_pattern(text, pattern):
+    if " " in pattern:
+        return pattern in text
+
+    return re.search(rf"\b{re.escape(pattern)}\b", text) is not None
 
 def detect_contradiction_risk(reference_answer, model_answer):
     reference_text = normalize_text(reference_answer)
@@ -96,19 +101,23 @@ def detect_contradiction_risk(reference_answer, model_answer):
     model_text = normalize_text(model_answer)
 
     reference_has_negative = any(
-        pattern in reference_text for pattern in NEGATIVE_PATTERNS
+        contains_pattern(reference_text, pattern)
+        for pattern in NEGATIVE_PATTERNS
     )
 
     model_has_positive = any(
-        pattern in model_text for pattern in POSITIVE_PATTERNS
+        contains_pattern(model_text, pattern)
+        for pattern in POSITIVE_PATTERNS
     )
 
     reference_has_positive = any(
-        pattern in reference_text for pattern in POSITIVE_PATTERNS
+        contains_pattern(reference_text, pattern)
+        for pattern in POSITIVE_PATTERNS
     )
 
     model_has_negative = any(
-        pattern in model_text for pattern in NEGATIVE_PATTERNS
+        contains_pattern(model_text, pattern)
+        for pattern in NEGATIVE_PATTERNS
     )
 
     if reference_has_negative and model_has_positive:

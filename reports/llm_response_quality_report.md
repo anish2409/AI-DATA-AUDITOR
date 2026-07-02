@@ -3,15 +3,13 @@
 ## Overall Summary
 
 - Total cases evaluated: 8
-- Average quality score: **66.61/100**
-- Passed responses: 4
+- Average quality score: **68.49/100**
+- Passed responses: 5
 - Needs review: 0
-- Failed responses: 4
+- Failed responses: 3
 
 ## Failed / Risky Responses
 
-- Case 2 | Score: 75.0 | Decision: Fail - Possible Contradiction
-  - Risk: Possible contradiction with reference answer.
 - Case 3 | Score: 34.85 | Decision: Fail
   - Risk: Required citation missing.
   - Risk: Low keyword coverage.
@@ -29,7 +27,7 @@
 |   case_id |   keyword_coverage | matched_keywords                   | citation_present   |   reference_overlap | contradiction_flag   |   latency_ms | latency_risk   |   estimated_cost_usd | cost_risk   |   quality_score | final_decision                |
 |----------:|-------------------:|:-----------------------------------|:-------------------|--------------------:|:---------------------|-------------:|:---------------|---------------------:|:------------|----------------:|:------------------------------|
 |         1 |             1      | duplicate, removed, training       | True               |              0.8333 | False                |          950 | Low            |                0.002 | Low         |           95    | Pass                          |
-|         2 |             1      | identifier, excluded, leakage      | True               |              0.6667 | True                 |         1100 | Medium         |                0.003 | Medium      |           75    | Fail - Possible Contradiction |
+|         2 |             1      | identifier, excluded, leakage      | True               |              0.6667 | False                |         1100 | Medium         |                0.003 | Medium      |           90    | Pass                          |
 |         3 |             0.3333 | psi                                | False              |              0.2727 | False                |          890 | Low            |                0.002 | Low         |           34.85 | Fail                          |
 |         4 |             1      | recall, false negatives, imbalance | True               |              0.7222 | False                |          760 | Low            |                0.002 | Low         |           91.67 | Pass                          |
 |         5 |             0.3333 | drift                              | False              |              0.1818 | True                 |         1300 | Medium         |                0.004 | Medium      |           17.12 | Fail - Possible Contradiction |
