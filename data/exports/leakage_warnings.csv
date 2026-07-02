@@ -1,0 +1,3 @@
+column_name,risk_type,severity,reason
+customer_id,Identifier Leakage Risk,High,Identifier-like columns can cause memorization and should not be used directly as model features.
+last_payment_status,Suspicious Column Name,Medium,"Column name contains 'last', which may indicate post-event or outcome-related information."
