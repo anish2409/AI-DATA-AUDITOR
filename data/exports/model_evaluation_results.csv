@@ -1,0 +1,4 @@
+model_name,train_f1,test_accuracy,test_precision,test_recall,test_f1,test_roc_auc,train_test_f1_gap,overfitting_warning,true_negatives,false_positives,false_negatives,true_positives
+Logistic Regression,0.3386,0.5669,0.2342,0.5098,0.321,0.5826,0.0176,Low Overfitting Risk,118,85,25,26
+Decision Tree,0.4297,0.3976,0.1928,0.6275,0.2949,0.4563,0.1347,Moderate Overfitting Risk,69,134,19,32
+Random Forest,0.9408,0.6772,0.1556,0.1373,0.1458,0.5013,0.795,High Overfitting Risk,165,38,44,7
