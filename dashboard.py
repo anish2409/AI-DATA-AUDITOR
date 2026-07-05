@@ -112,6 +112,35 @@ def get_latest_run_dir():
         reverse=True
     )[0]
 
+def list_run_dirs():
+    if not RUNS_DIR.exists():
+        return []
+
+    run_dirs = [
+        path for path in RUNS_DIR.iterdir()
+        if path.is_dir()
+    ]
+
+    return sorted(
+        run_dirs,
+        key=lambda path: path.stat().st_mtime,
+        reverse=True
+    )
+
+
+def format_run_label(run_dir):
+    manifest_path = Path(run_dir) / "audit_manifest.json"
+    manifest = read_json_if_exists(manifest_path)
+
+    run_name = Path(run_dir).name
+    created_at = manifest.get("created_at", "unknown time")
+    target_column = manifest.get("target_column", "unknown target")
+    decision = manifest.get("final_decision", "no decision")
+
+    short_decision = decision[:55]
+
+    return f"{run_name} | {created_at} | target: {target_column} | {short_decision}"
+
 
 def get_run_paths(run_dir):
     run_dir = Path(run_dir)
@@ -253,14 +282,21 @@ def render_upload_panel():
 
     st.sidebar.divider()
 
-    if st.sidebar.button("Load Latest Audit Run", use_container_width=True):
-        latest_run = get_latest_run_dir()
+    run_dirs = list_run_dirs()
 
-        if latest_run is None:
-            st.sidebar.warning("No previous audit run found.")
-        else:
-            st.session_state["current_run_dir"] = str(latest_run)
-            st.sidebar.success(f"Loaded: {latest_run.name}")
+    if run_dirs:
+        selected_run = st.sidebar.selectbox(
+            "Audit run history",
+            run_dirs,
+            format_func=format_run_label
+        )
+
+        if st.sidebar.button("Load Selected Audit Run", use_container_width=True):
+            st.session_state["current_run_dir"] = str(selected_run)
+            st.sidebar.success(f"Loaded: {selected_run.name}")
+
+    else:
+        st.sidebar.caption("No previous audit runs found.")
 
     return preview_df
 def render_dataset_preview(preview_df):
@@ -270,6 +306,43 @@ def render_dataset_preview(preview_df):
 
     with st.expander("Uploaded Dataset Preview", expanded=False):
         st.dataframe(preview_df.head(50), use_container_width=True)
+
+def render_run_metadata(run_dir):
+    paths = get_run_paths(run_dir)
+    manifest = read_json_if_exists(paths["manifest"])
+
+    st.subheader("Audit Run Metadata")
+
+    if not manifest:
+        st.warning("Audit manifest not found.")
+        return
+
+    col1, col2, col3 = st.columns(3)
+
+    with col1:
+        st.write("**Run ID**")
+        st.code(manifest.get("run_id", "unknown"))
+
+    with col2:
+        st.write("**Created At**")
+        st.code(manifest.get("created_at", "unknown"))
+
+    with col3:
+        st.write("**Target Column**")
+        st.code(manifest.get("target_column", "unknown"))
+
+    with st.expander("Input and Module Details", expanded=False):
+        st.write("**Input CSV**")
+        st.code(manifest.get("input_csv", "not available"))
+
+        st.write("**Baseline CSV**")
+        st.code(manifest.get("baseline_csv", "not provided"))
+
+        st.write("**Model Excluded Columns**")
+        st.write(manifest.get("model_excluded_columns", []))
+
+        st.write("**Enabled Modules**")
+        st.json(manifest.get("modules", {}))
 
 
 def render_executive_summary(run_dir):
@@ -484,6 +557,10 @@ def render_downloads(run_dir):
             )
 def render_run_dashboard(run_dir):
     st.caption(f"Current run: `{run_dir}`")
+
+    render_run_metadata(run_dir)
+
+    st.divider()
 
     tab1, tab2, tab3, tab4, tab5, tab6 = st.tabs(
         [
