@@ -1,0 +1,17 @@
+model_name,feature_name,importance
+Logistic Regression,numeric__income,0.377446
+Logistic Regression,categorical__gender_Unknown,0.376218
+Logistic Regression,categorical__gender_F,0.323855
+Logistic Regression,categorical__region_North,0.247214
+Logistic Regression,categorical__region_East,0.197269
+Logistic Regression,categorical__region_north,0.180656
+Logistic Regression,categorical__gender_male,0.154199
+Logistic Regression,categorical__region_UNKNOWN,0.120718
+Logistic Regression,categorical__region_South,0.115973
+Logistic Regression,categorical__region_West,0.110905
+Logistic Regression,numeric__support_tickets,0.087219
+Logistic Regression,categorical__gender_Female,0.059503
+Logistic Regression,categorical__gender_Male,0.047259
+Logistic Regression,numeric__tenure_months,0.028355
+Logistic Regression,numeric__age,0.019651
+Logistic Regression,numeric__monthly_spend,0.004342
