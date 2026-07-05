@@ -283,9 +283,17 @@ def run_model_evaluation(df, target_column, excluded_columns, reports_dir, expor
     results_df, metadata = model_eval.evaluate_models(df)
 
     result_path = exports_dir / "model_evaluation_results.csv"
+    threshold_path = exports_dir / "model_threshold_analysis.csv"
+    importance_path = exports_dir / "model_feature_importance.csv"
     report_path = reports_dir / "model_evaluation_report.md"
 
     results_df.to_csv(result_path, index=False)
+
+    threshold_df = metadata.get("threshold_analysis_df", pd.DataFrame())
+    importance_df = metadata.get("feature_importance_df", pd.DataFrame())
+
+    threshold_df.to_csv(threshold_path, index=False)
+    importance_df.to_csv(importance_path, index=False)
 
     model_eval.generate_model_report(
         results_df=results_df,
@@ -294,7 +302,7 @@ def run_model_evaluation(df, target_column, excluded_columns, reports_dir, expor
     )
 
     best_model = results_df.sort_values(
-        by="test_f1",
+        by=["test_f1", "test_roc_auc", "test_balanced_accuracy"],
         ascending=False
     ).iloc[0]
 
@@ -302,8 +310,12 @@ def run_model_evaluation(df, target_column, excluded_columns, reports_dir, expor
         "best_model": best_model["model_name"],
         "best_f1": best_model["test_f1"],
         "best_auc": best_model["test_roc_auc"],
+        "best_threshold": best_model.get("best_threshold", None),
+        "best_threshold_f1": best_model.get("best_threshold_f1", None),
         "overfitting_warning": best_model["overfitting_warning"],
         "excluded_columns": excluded_columns,
+        "threshold_analysis_saved": str(threshold_path),
+        "feature_importance_saved": str(importance_path),
     }
 
 
