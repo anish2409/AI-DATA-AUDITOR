@@ -1,0 +1,8 @@
+services:
+  ai-data-auditor:
+    build: .
+    container_name: ai-data-auditor
+    ports:
+      - "8501:8501"
+    volumes:
+      - ./audit_outputs:/app/audit_outputs

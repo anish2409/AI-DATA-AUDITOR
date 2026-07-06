@@ -1,0 +1,17 @@
+venv/
+__pycache__/
+*.pyc
+.ipynb_checkpoints/
+
+.git/
+
+.env
+.DS_Store
+
+audit_outputs/
+data/raw/
+data/drift_samples/
+data/llm_eval/
+
+notebooks/
+screenshots/
