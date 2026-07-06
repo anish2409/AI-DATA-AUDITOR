@@ -1,0 +1,23 @@
+name: Docker Build Check
+
+on:
+  push:
+    branches:
+      - main
+      - production-audit-engine
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  docker-build:
+    name: Build Docker Image
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build Docker image
+        run: |
+          docker build -t ai-data-auditor .

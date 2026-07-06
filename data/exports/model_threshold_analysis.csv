@@ -1,0 +1,6 @@
+model_name,best_threshold,best_threshold_f1,best_threshold_precision,best_threshold_recall
+Dummy Baseline,0.1,0.0,0.0,0.0
+Logistic Regression,0.45,0.339,0.2162,0.7843
+Random Forest,0.3,0.3481,0.2146,0.9216
+Extra Trees,0.25,0.346,0.2101,0.9804
+Hist Gradient Boosting,0.1,0.2822,0.2054,0.451
