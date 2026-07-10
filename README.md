@@ -36,6 +36,32 @@ This is intentional. The project demonstrates that data quality issues, drift, l
 
 ---
 
+## Dashboard Preview
+
+The dashboard supports CSV upload, target column selection, optional baseline drift comparison, optional LLM response evaluation, audit run history, metadata inspection, report viewing, CSV export viewing, and downloadable audit packages.
+
+![AI Data Auditor Dashboard](screenshots/dashboard_final_audit.png)
+
+---
+
+## Audit Screenshots
+
+### Drift and Data Risk
+
+![Drift and Data Risk](screenshots/drift_and_data_risk.png)
+
+### Model Evaluation
+
+![Model Evaluation](screenshots/model_evaluation.png)
+
+### Final Audit Report
+
+![Final Audit Report](screenshots/final_audit_report.png)
+
+### Reports and Exports
+
+![Reports and Exports](screenshots/reports_exports.png)
+
 ## Key Features
 
 ### Dynamic Upload-Based Dashboard
