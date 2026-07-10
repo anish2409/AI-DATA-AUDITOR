@@ -559,18 +559,11 @@ These limitations are intentional and documented.
 
 ---
 
-## Resume Bullet
+## Project Status
 
-Built a production-style AI Data Quality & Model Evaluation Auditor using Python, Streamlit, Pandas, Scikit-learn, Pytest, GitHub Actions, and Docker configuration to run upload-based AI audits, detect data quality issues, AI readiness risks, drift, leakage, fairness disparity, weak model reliability, and LLM response failures, generating downloadable reports, model leaderboards, feature importance, threshold analysis, and final deployment-readiness decisions.
-
----
-
-## Status
-
-```text
-Production-style portfolio project
-Tests passing
-Docker build verified through GitHub Actions
-Merged into main branch
-Ready for final screenshot and portfolio presentation
-```
+- Live app deployed on Streamlit Community Cloud
+- Main branch contains the stable version
+- Automated tests are configured with GitHub Actions
+- Docker build check is configured through GitHub Actions
+- Dashboard supports upload-based audit execution
+- Audit reports, CSV exports, and downloadable audit packages are generated automatically
