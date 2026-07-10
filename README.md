@@ -1,44 +1,44 @@
 # AI Data Quality & Model Evaluation Auditor
 
-A production-style AI audit platform for evaluating whether a dataset, machine learning workflow, and LLM response workflow are safe enough for AI experimentation or deployment.
+A production-style AI audit platform for evaluating whether a dataset, machine learning workflow, and optional LLM response workflow are safe enough for AI experimentation or deployment.
 
-This project is not just a model training notebook. It is an end-to-end audit system that checks data quality, AI readiness, drift, leakage risk, fairness signals, baseline model reliability, LLM response quality, and final deployment readiness.
+This is not a simple “train a model and show accuracy” project. It is an end-to-end audit system that checks data quality, AI readiness, drift, leakage risk, fairness signals, baseline model reliability, LLM response quality, and final deployment readiness.
 
 ---
 
 ## Why This Project Exists
 
-Most AI projects fail because teams jump directly into model training without checking whether the data is clean, stable, fair, leakage-free, and production-safe.
+Most AI projects jump directly into model training without checking whether the data is clean, stable, fair, leakage-free, and production-safe.
 
-This project solves that problem by answering:
+This project answers:
 
 - Is the uploaded dataset clean enough for AI modeling?
-- Are there missing values, duplicates, invalid values, outliers, or identifier columns?
+- Are there missing values, duplicate rows, invalid values, outliers, or identifier columns?
 - Is the dataset AI-ready?
 - Has the current data drifted from baseline data?
-- Are there leakage-risk columns?
+- Are there leakage-risk or post-event columns?
 - Are there fairness or group-disparity risks?
-- Do baseline ML models actually beat a dummy baseline?
+- Do ML models actually beat a dummy baseline?
 - Are LLM responses grounded, cited, and safe?
 - Should this system move toward production or stay in experimentation?
 
 ---
 
-## Current Final Decision Example
+## Final Decision Example
 
-For the included sample audit workflow, the system returns:
+For the included sample workflow, the audit system returns:
 
 ```text
 Not production-ready. Major remediation required before AI deployment.
 ```
 
-This is intentional. The project demonstrates that weak data quality, drift, leakage risk, fairness disparity, and unreliable model behavior should block production AI deployment.
+This is intentional. The project demonstrates that data quality issues, drift, leakage risk, fairness disparity, and weak model reliability should block production AI deployment.
 
 ---
 
 ## Key Features
 
-### Dynamic Upload-Based Audit Dashboard
+### Dynamic Upload-Based Dashboard
 
 The Streamlit dashboard allows users to:
 
@@ -47,7 +47,7 @@ The Streamlit dashboard allows users to:
 - Optionally upload a baseline CSV for drift detection
 - Optionally upload an LLM evaluation CSV
 - Run the full AI audit from the browser
-- View audit history
+- View audit run history
 - Load previous audit runs
 - Inspect audit metadata
 - View reports and CSV exports
@@ -57,9 +57,7 @@ The Streamlit dashboard allows users to:
 
 ### Full Audit Runner
 
-The full audit runner executes the entire pipeline from one function or CLI command.
-
-Core function:
+The full audit runner executes the complete pipeline from one function or CLI command.
 
 ```python
 run_full_audit(
@@ -77,7 +75,7 @@ CLI example:
 python -m src.core.full_audit_runner --input data/drift_samples/current_customer_ai_audit_dataset.csv --baseline data/raw/sample_customer_ai_audit_dataset.csv --target churn --output audit_outputs/sample_run
 ```
 
-Each run creates:
+Each audit run creates:
 
 ```text
 audit_outputs/
@@ -94,7 +92,7 @@ audit_outputs/
 
 ### 1. Data Quality Profiler
 
-Checks:
+Detects:
 
 - Missing values
 - Duplicate rows
@@ -114,7 +112,7 @@ column_quality_summary.csv
 
 ### 2. AI Readiness Scorer
 
-Calculates an AI readiness score based on:
+Calculates an AI readiness score using:
 
 - Data quality score
 - Missing value safety
@@ -172,7 +170,7 @@ bias_fairness_summary.csv
 
 ### 5. Production Model Evaluator
 
-This module is stronger than a basic student ML script.
+This module goes beyond a basic ML script.
 
 It includes:
 
@@ -200,7 +198,7 @@ model_threshold_analysis.csv
 model_feature_importance.csv
 ```
 
-Important: the goal is not to force a high score. The goal is to prove whether the model is actually reliable enough to trust.
+The goal is not to force a high score. The goal is to prove whether the model is reliable enough to trust.
 
 ---
 
@@ -227,7 +225,7 @@ llm_response_quality_scores.csv
 
 ### 7. Final Audit Summary
 
-Combines all audit modules into an executive-level scorecard and final decision.
+Combines all audit modules into an executive scorecard and final decision.
 
 Outputs:
 
@@ -268,7 +266,6 @@ AI-DATA-AUDITOR/
 ├── src/
 │   ├── core/
 │   │   └── full_audit_runner.py
-│   │
 │   ├── data_profiler.py
 │   ├── ai_readiness_scorer.py
 │   ├── drift_detector.py
@@ -435,8 +432,6 @@ Docker build is verified through GitHub Actions.
 
 ## Example Audit Outputs
 
-The audit system generates:
-
 | Output | Purpose |
 |---|---|
 | `data_quality_report.md` | Data quality issues |
@@ -512,7 +507,7 @@ Current limitations:
 - Fairness checks are diagnostic, not legal compliance approval
 - LLM evaluator is rule-based, not a replacement for human review
 
-These limitations are intentional and clearly documented.
+These limitations are intentional and documented.
 
 ---
 
@@ -539,8 +534,6 @@ Built a production-style AI Data Quality & Model Evaluation Auditor using Python
 ---
 
 ## Status
-
-Current status:
 
 ```text
 Production-style portfolio project
