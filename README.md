@@ -1,5 +1,11 @@
 # AI Data Quality & Model Evaluation Auditor
 
+## Live Demo
+
+[Open the AI Data Auditor App](https://ai-data-auditor.streamlit.app/)
+
+---
+
 A production-style AI audit platform for evaluating whether a dataset, machine learning workflow, and optional LLM response workflow are safe enough for AI experimentation or deployment.
 
 This is not a simple “train a model and show accuracy” project. It is an end-to-end audit system that checks data quality, AI readiness, drift, leakage risk, fairness signals, baseline model reliability, LLM response quality, and final deployment readiness.
